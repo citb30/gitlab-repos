@@ -1,0 +1,17 @@
+- name: Sample
+  debug:
+    msg: "Hello"
+
+- name: Gather a environment variable
+  set_fact:
+    PROJENV: "{{ansible_local.info.ENVIRONMENT}}"
+
+- name: Include Web Play 
+  include: web.yml
+  
+- name: Include App Play 
+  include: app.yml 
+
+- name: Include DB Play 
+  include: db.yml 
+  when: PROJENV == 'dev' 

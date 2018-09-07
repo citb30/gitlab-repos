@@ -1,0 +1,4 @@
+- name: Hello World Playbook
+  hosts: SAMPLE
+  tasks: 
+    - debug: msg="Hello World"

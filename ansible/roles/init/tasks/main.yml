@@ -1,0 +1,14 @@
+- name: wait for ssh connection
+  wait_for_connection:
+    delay: 30
+    timeout: 300
+    
+- name: Create ansible local facts directory 
+  file:
+    path: /etc/ansible/facts.d/
+    state: directory
+
+- name: Copy info fact
+  template:
+    src: "info.fact.j2"
+    dest: "/etc/ansible/facts.d/info.fact"

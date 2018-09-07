@@ -1,0 +1,6 @@
+- name: Setup Student Project Components
+  hosts: all
+  become: yes
+  roles:
+    - stack 
+  

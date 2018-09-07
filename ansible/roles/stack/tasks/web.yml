@@ -1,0 +1,34 @@
+- name: Install Web Server 
+  package:
+    name: httpd
+    state: latest 
+
+- name: Copy Mod_JK file
+  copy: 
+    src: mod_jk.so  
+    dest: /etc/httpd/modules/mod_jk.so 
+    mode: 0755 
+
+- name: Setup Mod-JK Conf file 
+  blockinfile:
+    path: /etc/httpd/conf.d/mod-jk.conf
+    create: yes
+    block: | 
+      LoadModule jk_module modules/mod_jk.so
+      JkWorkersFile conf.d/worker.properties
+      JkMount /student local
+      JkMount /student/* local
+
+- name: Setup Workers Properties file 
+  blockinfile:
+    path: /etc/httpd/conf.d/worker.properties
+    create: yes
+    block: | 
+      worker.list=local
+      worker.local.host=localhost
+      worker.local.port=8009
+
+- name: Restart HTTPD   
+  service:
+    name: httpd 
+    state: restarted 
