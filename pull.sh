@@ -1,5 +1,5 @@
 repos=(http://root:password@104.196.127.109/engineers/ansible.git)
-for repo in ${repo[*]}; do 
+for repo in ${repos[*]}; do 
   DIR=$(echo $repo | awk -F / '{print $NF}'|sed -e '/.git//' )
   rm -rf $DIR
   git clone $repo
