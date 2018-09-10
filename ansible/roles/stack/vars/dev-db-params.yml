@@ -1,0 +1,4 @@
+DBHOST: "{{ansible_hostname}}"
+DBNAME: studentapp
+DBUSER: student
+DBPASS: student@1

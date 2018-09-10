@@ -1,1 +1,20 @@
-- debug: msg='mariadb Setup'
+- name: Install DB
+  package: 
+    name: mariadb-server
+    state: installed
+
+- name: Start DB 
+  service:
+    name: mariadb
+    state: started
+
+- name: Copy Schema
+  copy:
+    src: student.sql 
+    dest: /tmp/student.sql 
+
+- name: Import DB Schema 
+  shell: mysql </tmp/student.sql 
+  
+   
+  

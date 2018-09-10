@@ -1,1 +1,23 @@
-- debug: msg='Tomcat Setup'
+- name: Install Java
+  package:
+    name: java
+    state: installed 
+
+- name: DOwnload and extract tomcat 
+  unarchive: 
+    src: http://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.11/bin/apache-tomcat-9.0.11.tar.gz
+    dest: /opt
+    remote_src: yes
+
+- name: Incldue ENV Variables.
+  include_vars:
+    file: "{{ansible_local.info.ENVIRONMENT}}-db-params.yml"
+
+- name: Update Context.xml file 
+  lineinfile:
+    path: /opt/apache-tomcat-9.0.11/conf/context.xml 
+    insertbefore: '</Context>'
+    line: "{{CONTEXT}}"
+  vars:
+    CONTEXT: <Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource" maxActive="50" maxIdle="30" maxWait="10000" username="{{DBUSER}}" password="{{DBPASS}}" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://{{DBHOST}}:3306/{{DBNAME}}"/>
+  

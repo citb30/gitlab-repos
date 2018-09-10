@@ -1,0 +1,4 @@
+DBHOST: prod-mysql.student.com
+DBNAME: studentapp
+DBUSER: student
+DBPASS: Pa$$WO%D

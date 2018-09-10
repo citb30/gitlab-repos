@@ -1,0 +1,4 @@
+DBHOST: stage-mysql.student.com
+DBNAME: studentapp
+DBUSER: student
+DBPASS: stagepass@1
